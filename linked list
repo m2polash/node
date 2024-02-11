@@ -1,46 +1,46 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct node
 {
     int data;
     struct node *next;
 }*head;
-//or struct node *head;
-void createlist()
-{
-    struct node *newnode,*temp;
-    head=(struct node*)malloc(sizeof(struct node));
 
-    printf("Enter value of node 1 : \n");
-    scanf("%d ",&head->data);
+void cretelist()
+{
+    struct node *newnode, *temp;
+    printf("Enter the value of node-1\n");
+    head = (struct node*) malloc(sizeof(struct node));
+    scanf("%d", &head->data);
     head->next=NULL;
-    temp = head;
+    temp=head;
     for(int i=1; i<=3; i++)
     {
-        newnode=(struct node*)malloc(sizeof(struct node));
-        printf("Enter value of node %d : \n",i+1);
-        scanf("%d",&newnode->data);
+        newnode = (struct node*) malloc(sizeof(struct node));
+        printf("Enter the value of node-%d\n", i+1);
+        scanf("%d", &newnode->data);
         newnode->next=NULL;
-        temp->next = newnode;
-        temp = newnode;
+        temp->next=newnode;
+        temp=newnode;
     }
 }
+
 void display()
 {
     struct node *temp;
     temp=head;
     int i=0;
-    while(temp != NULL)
+    while(temp!=NULL)
     {
-        printf("Value of node %d : %d\n",++i,temp->data);
+        printf("Node-%d: %d\n", ++i, temp->data);
         temp=temp->next;
     }
 }
+
 int main()
 {
-    createlist();
+    cretelist();
     display();
     return 0;
 }
-
