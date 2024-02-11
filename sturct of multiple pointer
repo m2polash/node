@@ -25,7 +25,7 @@ int main()
     q->a=3;
     q->c=p;
     q->d=r;
-    q->e=s->e;
+    q->e=s;
 
     r->a=4;
     r->b=s->b;
