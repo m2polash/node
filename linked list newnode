@@ -9,13 +9,16 @@ struct node
 
 void cretelist()
 {
+    printf("Enter Node count :\n");
+    int n;
+    scanf("%d",&n);
     struct node *newnode, *temp;
     printf("Enter the value of node-1\n");
     head = (struct node*) malloc(sizeof(struct node));
     scanf("%d", &head->data);
     head->next=NULL;
     temp=head;
-    for(int i=1; i<=3; i++)
+    for(int i=1; i<=n-1; i++)
     {
         newnode = (struct node*) malloc(sizeof(struct node));
         printf("Enter the value of node-%d\n", i+1);
