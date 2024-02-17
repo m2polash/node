@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct node {
+    int id;
+    float cgpa;
+    struct node *next;
+} *head;
+
+void creatlist() {
+    struct node *newnode, *temp;
+    head = (struct node*)malloc(sizeof(struct node));
+    printf("Enter the value of first node : \n\n");
+    printf("Enter Your ID : ");
+    scanf("%d", &head->id);
+    printf("Enter Your CGPA : ");
+    scanf("%f", &head->cgpa);
+
+    head->next = NULL;
+    temp = head;
+    for (int i = 1; i <= 3; i++) {
+        newnode = (struct node*)malloc(sizeof(struct node));
+        printf("\nEnter the value of node -> %d : \n\n", i);
+        printf("Enter Your ID : ");
+        scanf("%d", &newnode->id);
+        printf("Enter Your CGPA : ");
+        scanf("%f", &newnode->cgpa);
+        newnode->next = NULL;
+        temp->next = newnode;
+        temp = newnode;
+    }
+}
+
+void display() {
+    struct node *temp;
+    temp = head;
+    int i = 0;
+    while (temp != NULL) {
+        printf("\nNode--%d:\tID:%d \tCGPA:%.2f \n", ++i, temp->id, temp->cgpa);
+        temp = temp->next;
+    }
+}
+
+void search(int key) {
+    struct node *temp;
+    temp = head;
+    int found = 0;
+    while (temp != NULL) {
+        if (temp->id == key) {
+            found = 1;
+            printf("ID found!\n");
+            printf("ID: %d, CGPA: %.2f\n", temp->id, temp->cgpa);
+            break;
+        }
+        temp = temp->next;
+    }
+    if (!found)
+        printf("ID not found!\n");
+}
+
+int main() {
+    creatlist();
+    display();
+    int search_id;
+    printf("\nEnter the ID you want to search: ");
+    scanf("%d", &search_id);
+    search(search_id);
+    return 0;
+}
