@@ -38,9 +38,34 @@ void display()
     }
 }
 
+void searchlist()
+{
+    int searchitem;
+    printf("Enter search item\n");
+    scanf("%d",&searchitem);
+    struct node *temp = head;
+    int index =0;
+    while(temp != NULL)
+    {
+        if(temp->data==searchitem)
+        {
+            printf("Found at index : %d\n",index+1);
+            break;
+        }
+        else
+        {
+            temp=temp->next;
+            index++;
+        }
+    }
+    if(temp==NULL) printf("NOT Found\n");
+
+}
+
 int main()
 {
     cretelist();
     display();
+    searchlist();
     return 0;
 }
