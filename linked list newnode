@@ -65,10 +65,23 @@ void searchlist()
 
 }
 
+void countlist()
+{
+    struct node *temp;
+    temp=head;
+    int i=0;
+    while(temp!=NULL)
+    {
+        temp=temp->next;
+        i++;
+    }
+    printf("List Count : %d\n",i);
+}
 int main()
 {
     cretelist();
     display();
     searchlist();
+    countlist();
     return 0;
 }
