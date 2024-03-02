@@ -7,7 +7,7 @@ struct node
     struct node *next;
 }*head;
 
-void cretelist()
+void createlist()
 {
     printf("Enter Node count :\n");
     int n;
@@ -79,7 +79,7 @@ void countlist()
 }
 int main()
 {
-    cretelist();
+    createlist();
     display();
     searchlist();
     countlist();
