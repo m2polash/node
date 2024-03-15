@@ -1,0 +1,210 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+struct node
+{
+    int id;
+    float cgpa;
+    struct node *next;
+}*head;
+
+void createlist()
+{
+    int n;
+    printf("Enter how much you want to know : ");
+    scanf("%d",&n);
+    struct node *newnode,*temp;
+    head = (struct node*)malloc(sizeof(struct node));
+    printf("\nEnter ID No.1 : ");
+    scanf("%d",&head->id);
+    printf("\nEnter CGPA : ");
+    scanf("%f",&head->cgpa);
+    head->next=NULL;
+    temp=head;
+    for(int i = 1; i < n; i++)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("\nEnter ID No. %d: ",i+1);
+        scanf("%d",&newnode->id);
+        printf("\nEnter Your CGPA : ");
+        scanf("%f",&newnode->cgpa);
+        newnode->next=NULL;
+        temp->next=newnode;
+        temp = newnode;
+    }
+}
+
+void display()
+{
+    struct node *temp;
+    temp=head;
+    int i=0;
+    while(temp!=NULL)
+    {
+        printf("\n%d.ID : %d\tCGPA : %.2f",++i,temp->id,temp->cgpa);
+        temp=temp->next;
+    }
+}
+
+void search()
+{
+    struct node *temp;
+    temp=head;
+    int search_id;
+    printf("\n\nEnter the id you want to search : ");
+    scanf("%d",&search_id);
+    while(temp!=NULL)
+    {
+        if(search_id==temp->id)
+        {
+            printf("\nID : %d\tCGPA : %.2f\n",temp->id,temp->cgpa);
+            break;
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    if(temp==NULL)
+    {
+        printf("ID not found");
+    }
+}
+
+void editcgpa()
+{
+    int search_id;
+    float new_cgpa;
+    printf("\nEnter the ID to edit CGPA: ");
+    scanf("%d", &search_id);
+
+    struct node *temp;
+    temp = head;
+    while(temp != NULL)
+    {
+        if(search_id == temp->id)
+        {
+            printf("\nEnter the new CGPA: ");
+            scanf("%f", &new_cgpa);
+            temp->cgpa = new_cgpa;
+            printf("\nCGPA updated successfully.");
+            return;
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    if(temp==NULL)
+    {
+        printf("ID not found.\n");
+    }
+}
+
+
+void insertlist()
+{
+    struct node *newnode,*temp=head;
+    int count = 0;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    newnode=(struct node*)malloc(sizeof(struct node));
+    int N;
+    printf("\nEnter the position where you want to insert a new node :\n");
+    scanf("%d",&N);
+    printf("\nEnter ID : ");
+    scanf("%d", &newnode->id);
+    printf("\nEnter CGPA : ");
+    scanf("%f", &newnode->cgpa);
+    temp=head;
+    if(N==1)
+    {
+        newnode->next=head;
+        head=newnode;
+    }
+    else if(N>1 && N<=count)
+    {
+        for(int i=1; i<N-1; i++)
+        {
+            temp=temp->next;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+    else if(N==count+1)
+    {
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+        newnode->next=NULL;
+    }
+    if(N>count+1)
+    {
+        printf("\nError Position\n");
+    }
+}
+
+void removelist()
+{
+    struct node *prev=NULL,*temp=head;
+    int count;
+    count=0;
+    while(temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    temp=head;
+    int N;
+    printf("\nEnter the position of node u want to remove :");
+    scanf("%d",&N);
+    if(N==1)
+    {
+        head=temp->next;
+        free(temp);
+    }
+    else if(N>1 && N<=count)
+    {
+        for(int i=1; i<N; i++)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=temp->next;
+        free(temp);
+    }
+    else if(N==count+1)
+    {
+        while(temp->next!=NULL)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=NULL;
+        free(temp);
+    }
+    else
+    {
+        printf("\nError Position\n");
+    }
+}
+
+
+int main()
+{
+    createlist();
+    display();
+    search();
+    editcgpa();
+   display();
+    insertlist();
+    display();
+    removelist();
+    display();
+}
