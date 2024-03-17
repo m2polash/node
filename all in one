@@ -123,8 +123,8 @@ void insertlist()
     temp=head;
     if(N==1)
     {
-        newnode->next=head;
-        head=newnode;
+        newnode->next=temp;
+        temp=newnode;
     }
     else if(N>1 && N<=count)
     {
